@@ -1,1 +1,14 @@
-n8n/packages/nodes-base/nodes/Google/BigQuery/test/v2/node/executeQuery.queryParameters.workflow.json
+{
+  "name": "executeQuery.queryParameters",
+  "nodes": [
+    {
+      "parameters": {
+        "query": "SELECT * FROM example WHERE email = @email AND name = @name;"
+      },
+      "name": "BigQuery",
+      "type": "n8n-nodes-base.googleBigQuery",
+      "typeVersion": 2
+    }
+  ],
+  "connections": {}
+}
