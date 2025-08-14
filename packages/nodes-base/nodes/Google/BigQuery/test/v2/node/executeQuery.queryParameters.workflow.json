@@ -1,4 +1,3 @@
-n8n/packages/nodes-base/nodes/Google/BigQuery/test/v2/node/executeQuery.queryParameters.workflow.json
 {
   "name": "executeQuery.queryParameters",
   "nodes": [
