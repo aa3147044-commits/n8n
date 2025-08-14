@@ -3,15 +3,17 @@ services:
     name: n8n-affiliate-automation
     env: node
     plan: starter
-    buildCommand: |
-      npm install -g pnpm@10.12.1
-      pnpm install --frozen-lockfile --filter=!@n8n/chat
-      npm install -g ./packages/cli
-    startCommand: n8n start --port=$PORT
+
+    buildCommand: >
+      npm i -g pnpm@10.12.1 &&
+      pnpm --version &&
+      pnpm install --frozen-lockfile --filter=!@n8n/chat &&
+      pnpm run build
+
+    startCommand: node packages/cli/bin/n8n start --port=$PORT
+
     envVars:
       - key: NODE_VERSION
         value: 22.18.0
-      - key: PNPM_VERSION
-        value: 10.12.1
       - key: PORT
         value: 10000
