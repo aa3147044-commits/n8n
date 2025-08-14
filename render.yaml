@@ -10,7 +10,7 @@ services:
     startCommand: n8n start --port=$PORT
     envVars:
       - key: NODE_VERSION
-        value: 18.16.0
+        value: 22.18.0
       - key: PNPM_VERSION
         value: 10.12.1
       - key: PORT
