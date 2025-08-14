@@ -4,13 +4,12 @@ services:
     env: node
     plan: starter
     buildCommand: |
-      npm i -g pnpm@10.12.1 && \
-      pnpm --version && \
-      pnpm install --frozen-lockfile --filter '!@n8n/chat' --filter '!@n8n/n8n-extension-insights' && \
-      pnpm -w -r --filter 'n8n...' run build
-    startCommand: node packages/cli/bin/n8n start --port=$PORT
+      corepack enable
+      corepack prepare pnpm@10.12.1 --activate
+      pnpm install --frozen-lockfile
+    startCommand: pnpm start --port $PORT
     envVars:
       - key: NODE_VERSION
         value: 22.18.0
-      - key: PORT
-        value: 10000
+      - key: PNPM_VERSION
+        value: 10.12.1
