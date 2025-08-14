@@ -1,24 +1,22 @@
 services:
   - type: web
-    name: n8n-affiliate-automation
+    name: n8n
     env: node
     plan: starter
-
-    # Install standalone pnpm (no npm/corepack), ensure it's on PATH, then build only what's needed
     buildCommand: |
-      set -e
+      set -eux
       export PNPM_HOME="$HOME/.local/share/pnpm"
-      export PATH="$PNPM_HOME:$PATH"
+      export PATH="$PNPM_HOME/bin:$PATH"
       curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=10.12.1 sh -
       pnpm --version
-      pnpm install --frozen-lockfile --filter '!@n8n/chat' --filter '!@n8n/n8n-extension-insights'
-      pnpm -w -r --filter 'n8n...' run build
-
-    # Start the local CLI directly
-    startCommand: node packages/cli/bin/n8n start --port=$PORT
-
+      pnpm add -g n8n@1.81.1
+      # Verify n8n is installed
+      which n8n
+      n8n --version
+    startCommand: |
+      export PNPM_HOME="$HOME/.local/share/pnpm"
+      export PATH="$PNPM_HOME/bin:$PATH"
+      exec n8n start --port=$PORT
     envVars:
       - key: NODE_VERSION
         value: 22.18.0
-      - key: PORT
-        value: 10000
